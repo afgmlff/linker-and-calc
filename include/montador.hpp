@@ -9,6 +9,10 @@
 #include "fileHelper.hpp"
 
 class Montador {
+
+private:
+    string bitmap = "";
+
 public:
     void primeiraPassagem();
     //void segundaPassagem();

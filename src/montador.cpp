@@ -79,6 +79,16 @@ void Montador::primeiraPassagem() {
             if(l.op1 == "TEXT")
               flagTxtS = 1;
 
+// alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
+            if (l.operacao != "CONST" and l.operacao != "SECTION" and !l.operacao.empty()){
+                bitmap = bitmap + "0";
+            }
+/*
+            if (CHECAR OPERANDOS){
+                bitmap = bitmap + "1";
+            }
+*/
+
             if (!l.rotulo.empty()) { //checa se há rotulo
                 if (mapSimbolos.end() != mapSimbolos.find(l.rotulo)) {//busca na tabela se há repetido. caso afirmativo -> erro rotulo rep
 
@@ -197,7 +207,7 @@ string Montador::segundaPassagem() {
     if (errors.emptyStack()) {
         throw PassagemException("Montagem", errors.collectErros());
     }
-
+    cout << "\n" << bitmap << "\n";
     return code;
 }
 

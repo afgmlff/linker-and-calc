@@ -110,9 +110,14 @@ string concatLine(const Linha &linha) {
     return str;
 }
 
-void criaSaidaMontador(string codigo, string filename) {
+void criaSaidaMontador(string codigo, string filename) { //passar argc também, ou flag p/ indicar q precisa ser montado
     auto *arq = new PFile(trocaExtensao(filename, ".obj").c_str(), true);
-    arq->writeLine(codigo);
+    arq->writeLine("H: " + trocaExtensao(filename, " "));
+    arq->writeLine("T: " + codigo);
+//  if argc > 2{
+//    arq->writeLine tabela de uso
+//    arq->writeLine tabela definicoes
+//  }
     arq->finishWrite();
 }
 
