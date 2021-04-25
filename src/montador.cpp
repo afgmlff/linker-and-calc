@@ -69,7 +69,7 @@ void Montador::primeiraPassagem() {
             if(flagDataS == 1){
               contPostData += 1;
             }
-
+            cout << linha << "\n";
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
 
@@ -80,14 +80,22 @@ void Montador::primeiraPassagem() {
               flagTxtS = 1;
 
 // alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
-            if (l.operacao != "CONST" and l.operacao != "SECTION" and !l.operacao.empty()){
-                bitmap = bitmap + "0";
+            if (l.operacao != "SECTION" and !l.operacao.empty()){
+                if(flagDataS == 0 && flagTxtS == 1)
+                  bitmap = bitmap + "0";
+
+                else if(flagDataS == 1){
+                  bitmap = "0" + bitmap;
+                }
             }
-/*
-            if (CHECAR OPERANDOS){
+
+            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and !l.op1.empty()){
                 bitmap = bitmap + "1";
+                if (!l.op2.empty()){
+                  bitmap = bitmap + "1";
+                }
             }
-*/
+
 
             if (!l.rotulo.empty()) { //checa se há rotulo
                 if (mapSimbolos.end() != mapSimbolos.find(l.rotulo)) {//busca na tabela se há repetido. caso afirmativo -> erro rotulo rep
