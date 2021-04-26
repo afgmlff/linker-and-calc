@@ -16,6 +16,8 @@ public:
         QTD_OP_ERRADA,
         OPERANDO_INVALIDO,
         TOKEN_INVALIDO,
+        BEGIN_END_AUSENTE, //multiplos arquivos sem diretivas de begin/end
+        BEGIN_END_NOT_NEEDED, //pro caso de 1 unico arquivo de entrada do montador
     } error;
 
     EnumExcecao(tipoErro error) : std::exception() {

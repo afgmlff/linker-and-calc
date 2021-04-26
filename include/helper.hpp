@@ -33,7 +33,7 @@ string trocaExtensao(string nome, const string &terminacao);
 
 string concatLine(const Linha &linha);
 
-void criaSaidaMontador(string codigo, string filename);
+void criaSaidaMontador(string codigo, string filename, bool needLink);
 
 string maiusc(string str);
 

@@ -111,16 +111,17 @@ string concatLine(const Linha &linha) {
     return str;
 }
 
-void criaSaidaMontador(string codigo, string filename) { //passar argc também, ou flag p/ indicar q precisa ser montado
+void criaSaidaMontador(string codigo, string filename, bool needLink) { //passar argc também, ou flag p/ indicar q precisa ser montado
     auto *arq = new PFile(trocaExtensao(filename, ".obj").c_str(), true);
     arq->writeLine("H: " + trocaExtensao(filename, " "));
     arq->writeLine("H: " + to_string(gb_bitmap.size()));
     arq->writeLine("H: " + gb_bitmap);
     arq->writeLine("T: " + codigo);
-//  if argc > 2{
-//    arq->writeLine tabela de uso
-//    arq->writeLine tabela definicoes
-//  }
+    if (needLink){
+        cout << "\nDeve ser ligado";
+//      arq->writeLine tabela de uso
+//      arq->writeLine tabela definicoes
+    }
     arq->finishWrite();
 }
 

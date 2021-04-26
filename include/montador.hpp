@@ -43,6 +43,10 @@ public:
             {"SECTION", 0},
             {"SPACE",   1},
             {"CONST",   1},
+            {"BEGIN",   0},
+            {"END",     0},
+            {"PUBLIC",  0},
+            {"EXTERN",  0},
     };
 
     FileHandler *arquivo;

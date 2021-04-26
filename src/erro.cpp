@@ -24,6 +24,10 @@ string AssembleErr::mensagemError(EnumExcecao::tipoErro error) {
             return "Instrução com o tipo de operando inválido";
         case EnumExcecao::TOKEN_INVALIDO:
             return "Tokens inválidos";
+        case EnumExcecao::BEGIN_END_AUSENTE:
+            return "Diretivas BEGIN e END ausentes";
+        case EnumExcecao::BEGIN_END_NOT_NEEDED:
+            return "Diretivas BEGIN e END não devem ser utilizadas em montagem de apenas um arquivo";
     }
 }
 
