@@ -69,7 +69,7 @@ void Montador::primeiraPassagem() {
             if(flagDataS == 1){
               contPostData += 1;
             }
-            cout << linha << "\n";
+            
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
 
@@ -215,7 +215,7 @@ string Montador::segundaPassagem() {
     if (errors.emptyStack()) {
         throw PassagemException("Montagem", errors.collectErros());
     }
-    cout << "\n" << bitmap << "\n";
+    gb_bitmap = bitmap;
     return code;
 }
 

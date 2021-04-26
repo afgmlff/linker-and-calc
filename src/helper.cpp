@@ -2,6 +2,7 @@
 #define HELPER
 
 #include "../include/helper.hpp"
+#include "../include/global.hpp"
 
 using namespace std;
 
@@ -113,6 +114,8 @@ string concatLine(const Linha &linha) {
 void criaSaidaMontador(string codigo, string filename) { //passar argc também, ou flag p/ indicar q precisa ser montado
     auto *arq = new PFile(trocaExtensao(filename, ".obj").c_str(), true);
     arq->writeLine("H: " + trocaExtensao(filename, " "));
+    arq->writeLine("H: " + to_string(gb_bitmap.size()));
+    arq->writeLine("H: " + gb_bitmap);
     arq->writeLine("T: " + codigo);
 //  if argc > 2{
 //    arq->writeLine tabela de uso
