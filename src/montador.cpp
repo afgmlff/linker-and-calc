@@ -15,7 +15,7 @@ int Montador::sizeInstDiretiva(const string &instrucao) {
         return 3;
     } else if (instrucao == "STOP" or instrucao == "SPACE" or instrucao == "CONST") {
         return 1;
-    } else if (instrucao == "SECTION") {
+    } else if (instrucao == "SECTION" or instrucao == "BEGIN" or instrucao == "END" or instrucao == "PUBLIC" or instrucao == "EXTERN") {
         return 0;
     } else {
         return 2;
@@ -69,7 +69,7 @@ void Montador::primeiraPassagem() {
             if(flagDataS == 1){
               contPostData += 1;
             }
-            
+            cout << linha << "\n";
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
 

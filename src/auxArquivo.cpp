@@ -18,7 +18,7 @@ void AuxArquivo::extraiCode() {
     text_section_start = 0;
     bool writeOut = true;
     int contadorLinha = 0;
-    int flag = 0, flagData = 0, flagText = 0;
+    int flag = 0, flagData = 0, flagText = 0, flagStartData = 0;
     string linha, label, texto = "TEXT", dataa = "DATA";
 
     while (!arquivo->hasEnd()) {
@@ -33,20 +33,21 @@ void AuxArquivo::extraiCode() {
             }
             Linha l = splitLinha(linha, false);
 
-            if(l.op1 == "DATA"){
+            if((l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao))) and flagStartData == 0){
                 data_section_start = contadorLinha;
 //                cout << "\nData section starts at: " << data_section_start;
+                flagStartData = 1;
             }
 
-            if(l.op1 == "TEXT"){
+            if((mapInstrucao.end() != mapInstrucao.find(l.operacao) and flagText == 0) or (l.op1 == texto and flagText == 0)){
                 text_section_start = contadorLinha;
 //                cout << "\nText section starts at: " << text_section_start;
+                flagText = 1;
             }
 
-            if(l.op1 != texto and flagText == 0){ //escreve primeiro só a seção TEXT
+            if(flagText == 0){ //escreve primeiro só a seção TEXT
                 continue;
             }
-            else if (l.op1 == texto and flagText == 0) flagText = 1;
 
 //            cout << linha << '\n';
 
@@ -89,12 +90,12 @@ void AuxArquivo::extraiCode() {
             }
             Linha l = splitLinha(linha, false);
 
-            if(l.op1 != dataa and flag == 0){ //escreve depois só a seção DATA
+            if((l.op1 != dataa and !(mapDiretiva.end() != mapDiretiva.find(l.operacao))) and flag == 0){ //escreve depois só a seção DATA
                 continue;
             }
-            else if (l.op1 == dataa and flag == 0) flag = 1;
+            else if (((l.op1 == dataa) or (mapDiretiva.end() != mapDiretiva.find(l.operacao))) and flag == 0) flag = 1;
 
-            if(l.op1 == texto)
+            if((l.op1 == texto) or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
                 break;
 
 //            cout << linha << '\n';
@@ -124,7 +125,8 @@ void AuxArquivo::extraiCode() {
             }
 
     }
-
+    cout << "\ntexto começa em: "<< text_section_start << "\n";
+    cout << "\ndata começa em: "<< data_section_start << "\n";
     arquivo->arquivo.close();
     arquivoPronto->finishWrite();
 }
