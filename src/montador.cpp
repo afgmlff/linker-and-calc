@@ -27,7 +27,7 @@ void Montador::validaOPlinha(const Linha &linha) {
     if (linha.operacao == "COPY") {
         isValida = !linha.op1.empty() and !linha.op2.empty();
     }
-    else if (linha.operacao == "STOP" or linha.operacao == "SPACE") {
+    else if (linha.operacao == "STOP" or linha.operacao == "SPACE" or linha.operacao == "BEGIN" or linha.operacao == "END" or linha.operacao == "EXTERN") {
         isValida = linha.op1.empty() and linha.op2.empty();
     }
     else {
@@ -80,7 +80,7 @@ void Montador::primeiraPassagem() {
               flagTxtS = 1;
 
 // alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
-            if (l.operacao != "SECTION" and !l.operacao.empty()){
+            if (l.operacao != "SECTION" and l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.operacao.empty()){
                 if(flagDataS == 0 && flagTxtS == 1)
                   bitmap = bitmap + "0";
 
@@ -89,7 +89,7 @@ void Montador::primeiraPassagem() {
                 }
             }
 
-            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and !l.op1.empty()){
+            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and  l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.op1.empty()){
                 bitmap = bitmap + "1";
                 if (!l.op2.empty()){
                   bitmap = bitmap + "1";
