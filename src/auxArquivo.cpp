@@ -125,8 +125,8 @@ void AuxArquivo::extraiCode() {
             }
 
     }
-    cout << "\ntexto começa em: "<< text_section_start << "\n";
-    cout << "\ndata começa em: "<< data_section_start << "\n";
+//    cout << "\ntexto começa em: "<< text_section_start << "\n";
+//    cout << "\ndata começa em: "<< data_section_start << "\n";
     arquivo->arquivo.close();
     arquivoPronto->finishWrite();
 }

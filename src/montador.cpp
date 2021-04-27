@@ -69,14 +69,14 @@ void Montador::primeiraPassagem() {
             if(flagDataS == 1){
               contPostData += 1;
             }
-            cout << linha << "\n";
+//            cout << linha << "\n";
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
 
-            if(l.op1 == "DATA")
+            if(l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao)))
               flagDataS = 1;
 
-            if(l.op1 == "TEXT")
+            if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
               flagTxtS = 1;
 
 // alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
@@ -159,10 +159,10 @@ string Montador::segundaPassagem() {
 
 //            cout << l.operacao << '\n';
 
-            if(l.op1 == "DATA")
+            if(l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao)))
               flagDataS = 1;
 
-            if(l.op1 == "TEXT")
+            if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
               flagTxtS = 1;
 
             if (l.operacao != "CONST" and l.operacao != "SECTION") { //removendo possibilidade de ser diretiva
