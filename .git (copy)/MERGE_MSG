@@ -1,0 +1,6 @@
+Merge branch 'main' of https://github.com/afgmlff/linker-and-calc into main
+
+# Conflicts:
+#	bin/montador.o
+#	montador
+#	test_files_asm/exmod1.asm

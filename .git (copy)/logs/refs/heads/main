@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 9b5c13d04c9e47599827b5e6705d84e056306164 afgmlff <aeciofgm@gmail.com> 1619308879 -0300	clone: from https://github.com/afgmlff/linker-and-calc
+9b5c13d04c9e47599827b5e6705d84e056306164 adef8ecfcdc3543039c6281cf9b0b776415c8a5b afgmlff <aeciofgm@gmail.com> 1619308919 -0300	commit: t1 to repo
+adef8ecfcdc3543039c6281cf9b0b776415c8a5b 97b4b07d4d691f7b9ed6003d84f3b26a1ae020df afgmlff <aeciofgm@gmail.com> 1619311585 -0300	commit: two or three files
+97b4b07d4d691f7b9ed6003d84f3b26a1ae020df d58badda8a2a45985c28a354567bb8bca6d08eae afgmlff <aeciofgm@gmail.com> 1619321666 -0300	commit: verify space and variables for bitmap
+d58badda8a2a45985c28a354567bb8bca6d08eae f98fb260d8281be30a73abf0c7c3333fabfee295 afgmlff <aeciofgm@gmail.com> 1619392132 -0300	commit: bitmap ok
+f98fb260d8281be30a73abf0c7c3333fabfee295 78411f7fb411c09020d77f5765f275a4bca92b6d afgmlff <aeciofgm@gmail.com> 1619395406 -0300	commit: size header ok
+78411f7fb411c09020d77f5765f275a4bca92b6d 978b452d5fb7e9f91c406ab9f396eff709d5015d afgmlff <aeciofgm@gmail.com> 1619466735 -0300	commit: missing tables for linker
+978b452d5fb7e9f91c406ab9f396eff709d5015d 1a5ec5d004707d9159459d1e0ae7af91ec9c60d5 afgmlff <aeciofgm@gmail.com> 1619549518 -0300	commit: ignoring section directive
+1a5ec5d004707d9159459d1e0ae7af91ec9c60d5 789255cc97bb660f1748c4f63e3c25f2d7df8169 afgmlff <aeciofgm@gmail.com> 1619550773 -0300	commit: i think its working without section directives
+789255cc97bb660f1748c4f63e3c25f2d7df8169 fd275e86b969e208caadf1dd9c18ebd2abc3fd63 afgmlff <aeciofgm@gmail.com> 1619902914 -0300	commit: detect missing/bad presence of begin/end
