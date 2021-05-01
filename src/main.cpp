@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
             auxArquivo.extraiCode();
 
             Montador montador(auxArquivo.arquivoPronto);
-            montador.primeiraPassagem();
+            montador.primeiraPassagem(false);
             criaSaidaMontador(montador.segundaPassagem(), argv[1], false);
             std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
         }
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
           auxArquivo.extraiCode();
 
           Montador montador(auxArquivo.arquivoPronto);
-          montador.primeiraPassagem();
+          montador.primeiraPassagem(true);
           criaSaidaMontador(montador.segundaPassagem(), argv[1], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
           auxArquivo2.extraiCode();
 
           Montador montador2(auxArquivo2.arquivoPronto);
-          montador2.primeiraPassagem();
+          montador2.primeiraPassagem(true);
           criaSaidaMontador(montador2.segundaPassagem(), argv[2], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[2], ".obj") << std::endl;
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
           auxArquivo.extraiCode();
 
           Montador montador(auxArquivo.arquivoPronto);
-          montador.primeiraPassagem();
+          montador.primeiraPassagem(true);
           criaSaidaMontador(montador.segundaPassagem(), argv[1], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
           auxArquivo2.extraiCode();
 
           Montador montador2(auxArquivo2.arquivoPronto);
-          montador2.primeiraPassagem();
+          montador2.primeiraPassagem(true);
           criaSaidaMontador(montador2.segundaPassagem(), argv[2], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[2], ".obj") << std::endl;
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
           auxArquivo3.extraiCode();
 
           Montador montador3(auxArquivo3.arquivoPronto);
-          montador3.primeiraPassagem();
+          montador3.primeiraPassagem(true);
           criaSaidaMontador(montador3.segundaPassagem(), argv[3], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[3], ".obj") << std::endl;
         }

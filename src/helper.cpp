@@ -118,7 +118,7 @@ void criaSaidaMontador(string codigo, string filename, bool needLink) { //passar
     arq->writeLine("H: " + gb_bitmap);
     arq->writeLine("T: " + codigo);
     if (needLink){
-        cout << "\nDeve ser ligado";
+//        cout << "\nDeve ser ligado";
 //      arq->writeLine tabela de uso
 //      arq->writeLine tabela definicoes
     }

@@ -14,7 +14,7 @@ private:
     string bitmap = "";
 
 public:
-    void primeiraPassagem();
+    void primeiraPassagem(bool toBeLinked);
     //void segundaPassagem();
     string segundaPassagem();
 
@@ -43,6 +43,13 @@ public:
             {"SECTION", 0},
             {"SPACE",   1},
             {"CONST",   1},
+            {"BEGIN",   0},
+            {"END",     0},
+            {"PUBLIC",  0},
+            {"EXTERN",  0},
+    };
+
+    map<string, int> mapDiretivaLink = {
             {"BEGIN",   0},
             {"END",     0},
             {"PUBLIC",  0},

@@ -27,7 +27,7 @@ void Montador::validaOPlinha(const Linha &linha) {
     if (linha.operacao == "COPY") {
         isValida = !linha.op1.empty() and !linha.op2.empty();
     }
-    else if (linha.operacao == "STOP" or linha.operacao == "SPACE") {
+    else if (linha.operacao == "STOP" or linha.operacao == "SPACE" or linha.operacao == "BEGIN" or linha.operacao == "END" or linha.operacao == "EXTERN") {
         isValida = linha.op1.empty() and linha.op2.empty();
     }
     else {
@@ -51,9 +51,9 @@ void Montador::validaOPlinha(const Linha &linha) {
     }
 }
 
-void Montador::primeiraPassagem() {
+void Montador::primeiraPassagem(bool toBeLinked) {
     string linha;
-    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS = 0, flagDataS = 0, contPostText, contPostData;
+    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS = 0, flagDataS = 0, flagDirLink = 0, contPostText, contPostData, flagBegin = 0;
     contPostText = text_section_start;
     contPostData = data_section_start;
 
@@ -69,9 +69,17 @@ void Montador::primeiraPassagem() {
             if(flagDataS == 1){
               contPostData += 1;
             }
-//            cout << linha << "\n";
+
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
+
+//            cout << linha << "  | flag diretivalink: " << flagDirLink << "\n";
+//            cout << "    |  l.operacao: " << l.operacao << "   ";
+
+
+            if ((l.operacao == "BEGIN" or l.operacao == "END") and !toBeLinked){
+                throw EnumExcecao(EnumExcecao::BEGIN_END_NOT_NEEDED);
+            }
 
             if(l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao)))
               flagDataS = 1;
@@ -79,8 +87,32 @@ void Montador::primeiraPassagem() {
             if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
               flagTxtS = 1;
 
+            if((mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
+              flagDirLink = 1;
+
+            if(!(mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
+              flagDirLink = 0;
+
+            if (flagDirLink == 1){
+//                cout << "     | flagBegin: "<< flagBegin << "   ";
+                if (l.operacao != "BEGIN" and toBeLinked and flagBegin == 1){
+                    flagBegin = 2;
+                    throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
+                }
+                else if (l.operacao == "BEGIN" and toBeLinked and flagBegin == 1){
+                    flagBegin = 2;
+                }
+                if (l.operacao != "END" and toBeLinked and flagBegin == 0){
+                    flagBegin = 1;
+                    throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
+                }
+                else if (l.operacao == "END" and toBeLinked and flagBegin == 0)
+                  flagBegin = 1;
+            }
+
+
 // alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
-            if (l.operacao != "SECTION" and !l.operacao.empty()){
+            if (l.operacao != "SECTION" and l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.operacao.empty()){
                 if(flagDataS == 0 && flagTxtS == 1)
                   bitmap = bitmap + "0";
 
@@ -89,7 +121,7 @@ void Montador::primeiraPassagem() {
                 }
             }
 
-            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and !l.op1.empty()){
+            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and  l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.op1.empty()){
                 bitmap = bitmap + "1";
                 if (!l.op2.empty()){
                   bitmap = bitmap + "1";
@@ -138,7 +170,7 @@ void Montador::primeiraPassagem() {
 string Montador::segundaPassagem() {
     string linha;
     string code;
-    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS, flagDataS = 0, contPostText, contPostData;
+    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS, flagDirLink = 0, flagDataS = 0, contPostText, contPostData;
     contPostText = text_section_start;
     contPostData = data_section_start;
 
@@ -164,6 +196,9 @@ string Montador::segundaPassagem() {
 
             if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
               flagTxtS = 1;
+
+            if((mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
+              flagDirLink = 1;
 
             if (l.operacao != "CONST" and l.operacao != "SECTION") { //removendo possibilidade de ser diretiva
                 if ((mapSimbolos.end() == mapSimbolos.find(l.op1) and !l.op1.empty()) or (

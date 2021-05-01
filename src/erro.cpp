@@ -25,9 +25,9 @@ string AssembleErr::mensagemError(EnumExcecao::tipoErro error) {
         case EnumExcecao::TOKEN_INVALIDO:
             return "Tokens inválidos";
         case EnumExcecao::BEGIN_END_AUSENTE:
-            return "Diretivas BEGIN e END ausentes";
+            return "Diretivas BEGIN e/ou END ausentes";
         case EnumExcecao::BEGIN_END_NOT_NEEDED:
-            return "Diretivas BEGIN e END não devem ser utilizadas em montagem de apenas um arquivo";
+            return "Diretivas BEGIN e/ou END não devem ser utilizadas em montagem de apenas um arquivo";
     }
 }
 
@@ -48,9 +48,15 @@ bool AssembleErr::emptyStack() {
 string AssembleErr::collectErros() {
     string errorMessage;
     for (const auto &error: errors) {
+        if(error.code != EnumExcecao::BEGIN_END_AUSENTE){
         errorMessage = errorMessage + "\nLinha (" + to_string(error.numLinha) + ")" + ": " + mensagemError(error.code) + " (" + classifica(error.code) + ")"
                        "\nNo trecho: " + error.linha + "\n" +
                        "---" + "\n";
+        }
+        if(error.code == EnumExcecao::BEGIN_END_AUSENTE){
+            errorMessage = errorMessage + "\n" + mensagemError(error.code) +
+            "\n---" + "\n";
+        }
     }
     return errorMessage;
 }
