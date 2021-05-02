@@ -20,6 +20,8 @@ public:
 
     AssembleErr errors;
 
+    map<string, int> mapPresencaDir = {};
+
     map<string, int> mapSimbolos = {};
 
     map<string, int> mapUso = {};

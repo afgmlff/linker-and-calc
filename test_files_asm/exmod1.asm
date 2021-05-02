@@ -16,8 +16,8 @@ ADD Y
 STORE Y
 JMPP MOD_B
 L1: STOP
+end
 
 
 
-END
 

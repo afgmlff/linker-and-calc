@@ -62,7 +62,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
     while (!arquivo->hasEnd()) {
         try {
             arquivo->getLine(&linha);
-            cout << linha << '\n';
+
             if(flagDataS == 0 && flagTxtS == 1){
               contPostText += 1;
             }
@@ -72,6 +72,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
 
             if (linha.empty()) continue;
             Linha l = splitLinha(linha);
+//            cout << linha << '\n';
 
 //            cout << linha << "  | flag diretivalink: " << flagDirLink << "\n";
 //            cout << "    |  l.operacao: " << l.operacao << "   ";
@@ -81,7 +82,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
                 throw EnumExcecao(EnumExcecao::BEGIN_END_NOT_NEEDED);
             }
 
-            if(l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao)))
+            if(l.op1 == "DATA" or l.operacao == "CONST" or l.operacao == "SPACE")
               flagDataS = 1;
 
             if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
@@ -90,27 +91,12 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             if((mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao))){
               flagDirLink = 1;
               existeDirLink = 1;
+              mapPresencaDir[l.operacao] = contadorPosicao;
             }
             if(!(mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
               flagDirLink = 0;
 
 
-            if (flagDirLink == 1){
-//                cout << "     | flagBegin: "<< flagBegin << "   ";
-                if (l.operacao != "BEGIN" and toBeLinked and flagBegin == 1){
-                    flagBegin = 2;
-                    throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
-                }
-                else if (l.operacao == "BEGIN" and toBeLinked and flagBegin == 1){
-                    flagBegin = 2;
-                }
-                if (l.operacao != "END" and toBeLinked and flagBegin == 0){
-                    flagBegin = 1;
-                    throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
-                }
-                else if (l.operacao == "END" and toBeLinked and flagBegin == 0)
-                  flagBegin = 1;
-            }
 
 
 // alocando bitmap  ----> VERIFICAR O QUE FAZER COM "SPACE" E CHECAR OPERANDOS
@@ -167,11 +153,18 @@ void Montador::primeiraPassagem(bool toBeLinked) {
     }
 //    cout << flagDirLink;
     try{
-      if(toBeLinked and existeDirLink == 0){
+      if(toBeLinked and ((mapPresencaDir.end() == mapPresencaDir.find("BEGIN")) or (mapPresencaDir.end() == mapPresencaDir.find("END")))) {
         throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
       }
     } catch (EnumExcecao &e) {
         errors.pushErro(e.error, linha, contPostText);
+    }
+
+
+
+    for(auto elem : mapPresencaDir)
+    {
+       std::cout << elem.first << " " << elem.second << " " << "\n";
     }
 
     arquivo->resetFile();

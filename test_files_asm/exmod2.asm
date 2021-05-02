@@ -2,7 +2,7 @@
 
 ;teste
 
-MOD_A: BEGIN
+MOD_A: 
 Y:     EXTERN
 MOD_B: EXTERN
 PUBLIC VAL
@@ -19,5 +19,5 @@ L1: STOP
 
 
 
-END
+
 
