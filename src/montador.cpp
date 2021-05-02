@@ -53,7 +53,7 @@ void Montador::validaOPlinha(const Linha &linha) {
 
 void Montador::primeiraPassagem(bool toBeLinked) {
     string linha;
-    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS = 0, flagDataS = 0, flagDirLink = 0, contPostText, contPostData, flagBegin = 0;
+    int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS = 0, flagDataS = 0, flagDirLink = 0, contPostText, contPostData, flagBegin = 0, existeDirLink = 0;
     contPostText = text_section_start;
     contPostData = data_section_start;
 
@@ -87,9 +87,10 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             if(l.op1 == "TEXT" or (mapInstrucao.end() != mapInstrucao.find(l.operacao)))
               flagTxtS = 1;
 
-            if((mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
+            if((mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao))){
               flagDirLink = 1;
-
+              existeDirLink = 1;
+            }
             if(!(mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
               flagDirLink = 0;
 
@@ -164,9 +165,9 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             }
         }
     }
-
+    cout << flagDirLink;
     try{
-      if(toBeLinked and flagDirLink == 0){
+      if(toBeLinked and existeDirLink == 0){
         throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
       }
     } catch (EnumExcecao &e) {
