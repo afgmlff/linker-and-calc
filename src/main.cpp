@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 
             Montador montador(auxArquivo.arquivoPronto);
             montador.primeiraPassagem(false);
-            criaSaidaMontador(montador.segundaPassagem(), argv[1], false);
+            criaSaidaMontador(montador.segundaPassagem(false), argv[1], false);
             std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
         }
         else if (argc == 3){
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 
           Montador montador(auxArquivo.arquivoPronto);
           montador.primeiraPassagem(true);
-          criaSaidaMontador(montador.segundaPassagem(), argv[1], true);
+          criaSaidaMontador(montador.segundaPassagem(true), argv[1], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
 
           AuxArquivo auxArquivo2(argv[2]);
@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
           Montador montador2(auxArquivo2.arquivoPronto);
           montador2.primeiraPassagem(true);
-          criaSaidaMontador(montador2.segundaPassagem(), argv[2], true);
+          criaSaidaMontador(montador2.segundaPassagem(true), argv[2], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[2], ".obj") << std::endl;
 
         }
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 
           Montador montador(auxArquivo.arquivoPronto);
           montador.primeiraPassagem(true);
-          criaSaidaMontador(montador.segundaPassagem(), argv[1], true);
+          criaSaidaMontador(montador.segundaPassagem(true), argv[1], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[1], ".obj") << std::endl;
 
           AuxArquivo auxArquivo2(argv[2]);
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 
           Montador montador2(auxArquivo2.arquivoPronto);
           montador2.primeiraPassagem(true);
-          criaSaidaMontador(montador2.segundaPassagem(), argv[2], true);
+          criaSaidaMontador(montador2.segundaPassagem(true), argv[2], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[2], ".obj") << std::endl;
 
           AuxArquivo auxArquivo3(argv[3]);
@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
 
           Montador montador3(auxArquivo3.arquivoPronto);
           montador3.primeiraPassagem(true);
-          criaSaidaMontador(montador3.segundaPassagem(), argv[3], true);
+          criaSaidaMontador(montador3.segundaPassagem(true), argv[3], true);
           std::cout << "Arquivo de saída: " << trocaExtensao(argv[3], ".obj") << std::endl;
         }
         else {

@@ -93,6 +93,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             if(!(mapDiretivaLink.end() != mapDiretivaLink.find(l.operacao)))
               flagDirLink = 0;
 
+
             if (flagDirLink == 1){
 //                cout << "     | flagBegin: "<< flagBegin << "   ";
                 if (l.operacao != "BEGIN" and toBeLinked and flagBegin == 1){
@@ -164,10 +165,18 @@ void Montador::primeiraPassagem(bool toBeLinked) {
         }
     }
 
+    try{
+      if(toBeLinked and flagDirLink == 0){
+        throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
+      }
+    } catch (EnumExcecao &e) {
+        errors.pushErro(e.error, linha, contPostText);
+    }
+
     arquivo->resetFile();
 }
 
-string Montador::segundaPassagem() {
+string Montador::segundaPassagem(bool toBeLinked) {
     string linha;
     string code;
     int contadorPosicao = 0, contadorLinha = 0, auxCount = 0, flagTxtS, flagDirLink = 0, flagDataS = 0, contPostText, contPostData;
@@ -251,6 +260,13 @@ string Montador::segundaPassagem() {
         throw PassagemException("Montagem", errors.collectErros());
     }
     gb_bitmap = bitmap;
+
+
+    for(auto elem : mapSimbolos){
+        std::cout << elem.first << " " << elem.second << " " << "\n";
+    }
+
+
     return code;
 }
 

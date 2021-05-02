@@ -16,11 +16,15 @@ private:
 public:
     void primeiraPassagem(bool toBeLinked);
     //void segundaPassagem();
-    string segundaPassagem();
+    string segundaPassagem(bool toBeLinked);
 
     AssembleErr errors;
 
     map<string, int> mapSimbolos = {};
+
+    map<string, int> mapUso = {};
+
+    map<string, int> mapDefinicoes = {};
 
     map<string, int> mapInstrucao = {
             {"ADD", 1},
