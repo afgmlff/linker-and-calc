@@ -21,6 +21,54 @@ void AuxArquivo::extraiCode() {
     int flag = 0, flagData = 0, flagText = 0, flagStartData = 0;
     string linha, label, texto = "TEXT", dataa = "DATA";
 
+
+
+    while(!arquivo->hasEnd()){
+        arquivo->getLine(&linha);
+        contadorLinha++;
+        if (linha.empty() or (lstrip(linha))[0] == ';'){
+          arquivoPronto->writeLine("");
+//              cout << '\n';
+          continue;
+        }
+        Linha l = splitLinha(linha, false);
+
+
+
+        if(l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN"){
+            continue;
+        }
+
+        if (isLabel(l)) {
+            label = l.rotulo;
+            continue;
+        } else {
+            if (!label.empty()) {
+                if (l.rotulo.empty()) {
+                    l.rotulo = label;
+                }
+            }
+            label = "";
+        }
+
+        if (mapComponente.end() != mapComponente.find(l.op1)) {
+            l.op1 = mapComponente[l.op1];
+        }
+        if (mapComponente.end() != mapComponente.find(l.op2)) {
+            l.op2 = mapComponente[l.op2];
+        }
+        if (writeOut) {
+            arquivoPronto->writeLine(concatLine(l));
+//            cout << concatLine(l) << "\n";
+        } else {
+            writeOut = true;
+        }
+
+    }
+
+
+
+    arquivo->resetFile();  //reseta o arquivo para ler apenas TEXT
     while (!arquivo->hasEnd()) {
 
             arquivo->getLine(&linha);
@@ -32,6 +80,10 @@ void AuxArquivo::extraiCode() {
               continue;
             }
             Linha l = splitLinha(linha, false);
+
+            if(l.operacao == "BEGIN" or l.operacao == "END" or l.operacao == "PUBLIC" or l.operacao == "EXTERN"){
+                continue;
+            }
 
             if((l.op1 == "DATA" or (mapDiretiva.end() != mapDiretiva.find(l.operacao))) and flagStartData == 0){
                 data_section_start = contadorLinha;
@@ -89,6 +141,10 @@ void AuxArquivo::extraiCode() {
               continue;
             }
             Linha l = splitLinha(linha, false);
+
+            if(l.operacao == "BEGIN" or l.operacao == "END" or l.operacao == "PUBLIC" or l.operacao == "EXTERN"){
+                continue;
+            }
 
             if((l.op1 != dataa and !(mapDiretiva.end() != mapDiretiva.find(l.operacao))) and flag == 0){ //escreve depois só a seção DATA
                 continue;

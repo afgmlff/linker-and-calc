@@ -62,7 +62,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
     while (!arquivo->hasEnd()) {
         try {
             arquivo->getLine(&linha);
-//            cout << linha << '\n';
+            cout << linha << '\n';
             if(flagDataS == 0 && flagTxtS == 1){
               contPostText += 1;
             }
@@ -165,7 +165,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             }
         }
     }
-    cout << flagDirLink;
+//    cout << flagDirLink;
     try{
       if(toBeLinked and existeDirLink == 0){
         throw EnumExcecao(EnumExcecao::BEGIN_END_AUSENTE);
