@@ -121,16 +121,16 @@ void criaSaidaMontador(string codigo, string filename, bool needLink) { //passar
 
 //    cout << "idArq: " << fator[idArquivo];
     if (needLink){
-      cout << "Mapa de Uso: \n";
       for(auto elem : mapUso){
-        elem.second = elem.second + fator[idArquivo-1];
-        std::cout << elem.first << " " << elem.second << " " << "\n";
+        arq->writeLine("U: " + elem.first + ", " + to_string(elem.second) + "+");
+//        elem.second = elem.second + fator[idArquivo-1];
+//        std::cout << elem.first << " " << elem.second << " " << "\n";
       }
     }
-      cout << "\nMapa de Definicoes: \n";
+    
     for(auto elem : mapDefinicoes){
-
-      std::cout << elem.first << " " << elem.second << " " << "\n";
+        arq->writeLine("D: " + elem.first + ", " + to_string(elem.second));
+//      std::cout << elem.first << " " << elem.second << " " << "\n";
     }
     mapDefinicoes.clear();
     mapUsoAux.clear();

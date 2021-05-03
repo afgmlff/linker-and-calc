@@ -2,3 +2,7 @@ H: test_files_asm/exmod2
 H: 10
 H: 0001010101
 T: 13 8 13 0 13 8 5 0 0 0 
+U: L1, 7+
+U: VAL, 3+
+D: MOD_B, 0
+D: Y, 8

@@ -27,3 +27,20 @@ Como executar:
 
 6) Assim, o simulador mostrará na tela o valor de PC e ACC após cada instrução, bem como o valor de OUTPUT para instruções do tipo OUTPUT.
 7) Também é gerado um arquivo de saida .OUT na mesma pasta do arquivo de entrada (por exemplo, ex1.out, dentro da pasta "test_files_asm"), com os OUTPUTS do programa, separados por um "ENTER".
+
+# Formato do arquivo objeto
+O arquivo objeto é composto por 4 partes: cabeçalho (H), código objeto (T), tabela de uso (U) e tabela de definições (D). Por exemplo:
+
+H: nome do arquivo (sem extensão)
+H: tamanho
+H: mapa de bits
+T: código objeto em linha única
+U: primeiro elemento da tabela de uso
+U: segundo elemento da tabela de uso
+...
+D: primeiro elemento da tabela de definições
+D: segundo elemento da tabela de definições
+...
+D: último elemento da tabela de definições (fim do arquivo objeto)
+
+
