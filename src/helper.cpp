@@ -122,6 +122,7 @@ void criaSaidaMontador(string codigo, string filename, bool needLink) { //passar
 //      arq->writeLine tabela de uso
 //      arq->writeLine tabela definicoes
     }
+    mapUso.clear();
     arq->finishWrite();
 }
 

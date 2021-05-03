@@ -146,6 +146,17 @@ void Montador::primeiraPassagem(bool toBeLinked) {
                 mapDefinicoes[l.op1] = contadorPosicao;
             }
 
+            if(l.operacao == "EXTERN"){
+                mapUsoAux[l.rotulo] = contadorPosicao;
+            }
+
+            if(mapUsoAux.end() != mapUsoAux.find(l.op1)){
+              mapUso.emplace(l.op1, contadorPosicao-1);
+            }
+
+            if(!l.op2.empty() and mapUsoAux.end() != mapUsoAux.find(l.op2)){
+              mapUso.emplace(l.op2, contadorPosicao-1);
+            }
 
         } catch (EnumExcecao &e) {
             if(flagDataS == 0){
@@ -174,7 +185,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
       }
     }
 
-    for(auto elem : mapDefinicoes)
+    for(auto elem : mapUso)
     {
        std::cout << elem.first << " " << elem.second << " " << "\n";
     }
