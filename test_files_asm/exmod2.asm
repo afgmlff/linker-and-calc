@@ -2,7 +2,7 @@
 
 ;teste
 
-MOD_A: 
+MOD_A: BEGIN
 Y:     EXTERN
 MOD_B: EXTERN
 PUBLIC VAL
@@ -16,7 +16,7 @@ ADD Y
 STORE Y
 JMPP MOD_B
 L1: STOP
-
+END
 
 
 

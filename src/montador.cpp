@@ -140,6 +140,13 @@ void Montador::primeiraPassagem(bool toBeLinked) {
                     throw EnumExcecao(EnumExcecao::DIRETIVA_INST_INVALID); //caso nao seja -> erro operacao
                 }
             }
+
+            //map mapUso
+            if(l.operacao == "PUBLIC"){
+                mapDefinicoes[l.op1] = contadorPosicao;
+            }
+
+
         } catch (EnumExcecao &e) {
             if(flagDataS == 0){
               errors.pushErro(e.error, linha, contPostText);
@@ -160,9 +167,14 @@ void Montador::primeiraPassagem(bool toBeLinked) {
         errors.pushErro(e.error, linha, contPostText);
     }
 
+    for(auto e1 : mapDefinicoes){
+      for(auto e2 : mapSimbolos){
+        if(e1.first == e2.first)
+          mapDefinicoes[e1.first] = e2.second;
+      }
+    }
 
-
-    for(auto elem : mapPresencaDir)
+    for(auto elem : mapDefinicoes)
     {
        std::cout << elem.first << " " << elem.second << " " << "\n";
     }
@@ -255,11 +267,11 @@ string Montador::segundaPassagem(bool toBeLinked) {
     }
     gb_bitmap = bitmap;
 
-
+/*
     for(auto elem : mapSimbolos){
         std::cout << elem.first << " " << elem.second << " " << "\n";
     }
-
+*/
 
     return code;
 }

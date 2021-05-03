@@ -24,10 +24,6 @@ public:
 
     map<string, int> mapSimbolos = {};
 
-    map<string, int> mapUso = {};
-
-    map<string, int> mapDefinicoes = {};
-
     map<string, int> mapInstrucao = {
             {"ADD", 1},
             {"SUB", 2},
