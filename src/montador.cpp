@@ -120,7 +120,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             if (!l.rotulo.empty()) { //checa se há rotulo
                 if (mapSimbolos.end() != mapSimbolos.find(l.rotulo)) {//busca na tabela se há repetido. caso afirmativo -> erro rotulo rep
 
-                    throw EnumExcecao(EnumExcecao::DECLARACAO_ROT_REP);
+                    //throw EnumExcecao(EnumExcecao::DECLARACAO_ROT_REP);
                 }
                 else {//caso negativo -> insere rotulo
 
@@ -184,12 +184,12 @@ void Montador::primeiraPassagem(bool toBeLinked) {
           mapDefinicoes[e1.first] = e2.second;
       }
     }
-
+/*
     for(auto elem : mapUso)
     {
        std::cout << elem.first << " " << elem.second << " " << "\n";
     }
-
+*/
     arquivo->resetFile();
 }
 
@@ -277,7 +277,10 @@ string Montador::segundaPassagem(bool toBeLinked) {
         throw PassagemException("Montagem", errors.collectErros());
     }
     gb_bitmap = bitmap;
-
+    fator[idArquivo] = gb_bitmap.size();
+//    cout << fator[0];
+//    cout << fator[1];
+    fator[2] = fator[0] + fator[1];
 /*
     for(auto elem : mapSimbolos){
         std::cout << elem.first << " " << elem.second << " " << "\n";

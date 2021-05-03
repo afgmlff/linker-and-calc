@@ -9,3 +9,5 @@ extern string gb_bitmap;
 extern map<string, int> mapUsoAux;
 extern multimap<string, int> mapUso;
 extern map<string, int> mapDefinicoes;
+extern int fator[3];
+extern int idArquivo;

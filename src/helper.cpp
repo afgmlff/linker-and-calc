@@ -117,12 +117,18 @@ void criaSaidaMontador(string codigo, string filename, bool needLink) { //passar
     arq->writeLine("H: " + to_string(gb_bitmap.size()));
     arq->writeLine("H: " + gb_bitmap);
     arq->writeLine("T: " + codigo);
+
+
+//    cout << "idArq: " << fator[idArquivo];
     if (needLink){
-//        cout << "\nDeve ser ligado";
-//      arq->writeLine tabela de uso
-//      arq->writeLine tabela definicoes
+      for(auto elem : mapUso){
+        elem.second = elem.second + fator[idArquivo-1];
+        std::cout << elem.first << " " << elem.second << " " << "\n";
+      }
     }
+    mapUsoAux.clear();
     mapUso.clear();
+    idArquivo = idArquivo + 1;
     arq->finishWrite();
 }
 
