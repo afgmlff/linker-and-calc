@@ -41,13 +41,11 @@ T: código objeto em linha única
 
 U: primeiro elemento da tabela de uso
 
-U: segundo elemento da tabela de uso
-
 ...
 
-D: primeiro elemento da tabela de definições
+U: ultimo elemento da tabela de uso
 
-D: segundo elemento da tabela de definições
+D: primeiro elemento da tabela de definições
 
 ...
 
