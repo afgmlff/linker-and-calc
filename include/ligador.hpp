@@ -19,6 +19,8 @@ public:
   	void ligar();
     void alinharCodigo();
     int extraiFatorC();
+    void corrigePendencia();
+    void populate_tuple();
 
 };
 

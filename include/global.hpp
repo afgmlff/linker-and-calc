@@ -1,5 +1,7 @@
 #include <string>
 #include <map>
+#include <vector>
+#include <tuple>
 using namespace std;
 
 extern int data_section_start;
@@ -17,3 +19,5 @@ extern int idArquivo;
 extern string codigo_lig;
 extern int idArquivoLig;
 extern map<string, int> mapGlobalDef;
+extern multimap<string, int> mapUsoCorreto;
+extern vector<tuple<char, int>> mapBitValue;

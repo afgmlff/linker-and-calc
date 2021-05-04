@@ -104,12 +104,12 @@ void Montador::primeiraPassagem(bool toBeLinked) {
                 if(flagDataS == 0 && flagTxtS == 1)
                   bitmap = bitmap + "0";
 
-                else if(flagDataS == 1){
-                  bitmap = "0" + bitmap;
+                else if(flagDataS == 1 and l.operacao == "SPACE"){
+                  bitmap = bitmap + "0";
                 }
             }
 
-            if (l.operacao != "CONST" and l.operacao != "SECTION" and l.operacao != "SPACE" and  l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.op1.empty()){
+            if (l.operacao != "SECTION" and l.operacao != "SPACE" and  l.operacao != "BEGIN" and l.operacao != "END" and l.operacao != "PUBLIC" and l.operacao != "EXTERN" and !l.op1.empty()){
                 bitmap = bitmap + "1";
                 if (!l.op2.empty()){
                   bitmap = bitmap + "1";

@@ -6,6 +6,45 @@
 
 using namespace std;
 
+Ligador::Ligador(string arquivoL) {
+	arquivoLig = arquivoL;
+}
+
+void Ligador::populate_tuple(){
+  ifstream file;
+  string pAux, linha;
+  char bit_id;
+  int i = 0, teste[40], numero, tamanho;
+
+
+
+  file.open(arquivoLig);
+  while(getline(file, linha)){
+    if(linha.find("T:") == 0){
+      linha = (linha.erase(0,3));
+      break;
+    }
+  }
+  istringstream iss(linha);
+  while ( getline( iss, pAux, ' ' ) ) {
+    teste[i] = atoi(pAux.c_str());
+    cout << teste[i] << endl;
+    i++;
+  }
+
+  i = fator[idArquivoLig-1];
+  tamanho = i + extraiFatorC();
+  cout << "i inicial: " << i << endl;
+  cout << "i final: " << tamanho << endl;
+
+
+  while(i < tamanho){
+
+    i++;
+  }
+
+}
+
 map<string, int> s_int_to_map(string const& s)
 {
     map<string, int> m;
@@ -19,16 +58,14 @@ map<string, int> s_int_to_map(string const& s)
     return m;
 }
 
-Ligador::Ligador(string arquivoL) {
-	arquivoLig = arquivoL;
-}
+
 
 Ligador::~Ligador() {}
 
 void Ligador::ligar(){
   alinharCodigo();
   extraiFatorC();
-//  aplicaFatorC();
+//  corrigePendencia();
 
 }
 
@@ -40,10 +77,11 @@ std::string &lstrip(std::string &s) {
 
 void Ligador::alinharCodigo(){
   map<string, int> mapAux = {};
+  map<string, int> mapAux2 = {};
 
   ifstream file;
   ofstream outfile;
-  string linha;
+  string linha, auxS;
   string saida_ligador = "test_files_asm/saida_ligador.obj";
   int contL = 1;
 
@@ -63,15 +101,25 @@ void Ligador::alinharCodigo(){
     if(linha.find("D:") == 0){
       mapAux = s_int_to_map(linha.erase(0,3));
       for(auto elem : mapAux){
-        mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1]);
+        mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1]);  //fator de correcao na tabela def global
       }
     }
+
+    if(linha.find("U:") == 0){
+      auxS = linha.erase(0,3);
+      mapAux2 = s_int_to_map(auxS.erase(auxS.size() - 1));
+      for(auto elem : mapAux2){
+        mapUsoCorreto.emplace(elem.first, elem.second + fator[idArquivoLig-1]);
+      }
+    }
+
     contL++;
   }
   outfile << codigo_lig;
   file.close();
   outfile.close();
 
+  populate_tuple();
 //  cout << fator[idArquivoLig -1]; //o fator de correção atual é o tamanho de espaço utilizado pelo módulo anterior
 
 }
@@ -91,4 +139,8 @@ int Ligador::extraiFatorC(){
     fileAux.close();
 //    cout << fatorC;
     return fatorC;
+}
+
+void Ligador::corrigePendencia(){
+
 }

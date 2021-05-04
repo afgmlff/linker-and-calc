@@ -13,3 +13,5 @@ int idArquivo = 1;
 string codigo_lig = "";
 int idArquivoLig = 0;
 map<string, int> mapGlobalDef = {};
+multimap <string, int> mapUsoCorreto = {};
+vector<tuple<char, int>> mapBitValue = {};
