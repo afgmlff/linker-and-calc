@@ -44,7 +44,7 @@ ifeq ($(UNAME_S), Darwin)
 endif
 endif
 
-all: $(EXEC) simulador
+all: $(EXEC) simulador ligador
 
 $(EXEC): $(OBJ_FILES)
 	$(CC) -o $@ $^ $(LIBS)
@@ -63,6 +63,9 @@ endif
 simulador: src/simulador/mainS.cpp
 	g++ -std=c++11 -o simulador src/simulador/mainS.cpp src/simulador/simulador.cpp 
 
+
+ligador: src/ligador/mainL.cpp
+	g++ -std=c++11 -o ligador src/ligador/mainL.cpp src/ligador/ligador.cpp 
 
 print-% : ; @echo $* = $($*)
 

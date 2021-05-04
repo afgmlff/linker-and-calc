@@ -49,7 +49,7 @@ string AssembleErr::collectErros() {
     string errorMessage;
     for (const auto &error: errors) {
         if(error.code != EnumExcecao::BEGIN_END_AUSENTE){
-        errorMessage = errorMessage + "\nLinha (" + to_string(error.numLinha) + ")" + ": " + mensagemError(error.code) + " (" + classifica(error.code) + ")"
+        errorMessage = errorMessage + "\n" + mensagemError(error.code) + 
                        "\nNo trecho: " + error.linha + "\n" +
                        "---" + "\n";
         }
