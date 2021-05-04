@@ -43,8 +43,23 @@ void Ligador::alinharCodigo(){
     contL++;
   }
   outfile << codigo_lig;
+  file.close();
+  outfile.close();
+  cout << extraiFatorC();
 }
 
 int Ligador::extraiFatorC(){
+    ifstream fileAux;
+    int fatorC = 0, contL = 1;
+    string linha;
+    fileAux.open(arquivoLig);
+    while(getline(fileAux, linha)){
+      if(contL == 2){
+        fatorC = stoi(lstrip(linha.erase(0,2)));
 
+        }
+      contL++;
+    }
+    fileAux.close();
+    return fatorC;
 }
