@@ -12,23 +12,27 @@ Ligador::Ligador(string arquivoL) {
 
 void Ligador::populate_tuple(){
   ifstream file;
-  string pAux, linha;
-  char bit_id;
-  int i = 0, teste[40], numero, tamanho;
+  string pAux, linha, linha2;
+  char bit_id[99];
+  int i = fator[idArquivoLig-1], teste[99], numero, tamanho, contL = 1;
 
 
 
   file.open(arquivoLig);
   while(getline(file, linha)){
+    if(contL == 3){
+      linha2 = (linha.erase(0,3));
+    }
     if(linha.find("T:") == 0){
       linha = (linha.erase(0,3));
       break;
     }
+    contL++;
   }
   istringstream iss(linha);
   while ( getline( iss, pAux, ' ' ) ) {
     teste[i] = atoi(pAux.c_str());
-    cout << teste[i] << endl;
+//    cout << teste[i] << endl;
     i++;
   }
 
@@ -37,11 +41,23 @@ void Ligador::populate_tuple(){
   cout << "i inicial: " << i << endl;
   cout << "i final: " << tamanho << endl;
 
+  int j = fator[idArquivoLig-1];
+
+  for(char character : linha2){
+    bit_id[j] = character;
+//    cout << bit_id[j] << " ";
+    j++;
+  }
+
 
   while(i < tamanho){
+    mapBitValue.push_back(make_tuple(bit_id[i], teste[i]));
 
+    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
     i++;
   }
+
+
 
 }
 
