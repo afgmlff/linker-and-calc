@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../../include/ligador.hpp"
+#include "../../include/global.hpp"
 
 int main(int argc, char **argv) {
   if (argc < 3){

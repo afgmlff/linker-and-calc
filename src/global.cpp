@@ -8,3 +8,6 @@ multimap <string, int> mapUso = {};
 map<string, int> mapDefinicoes = {};
 int fator[3] = {0, 0, 0};
 int idArquivo = 1;
+
+//Ligador
+string codigo_lig = "";

@@ -65,7 +65,7 @@ simulador: src/simulador/mainS.cpp
 
 
 ligador: src/ligador/mainL.cpp
-	g++ -std=c++11 -o ligador src/ligador/mainL.cpp src/ligador/ligador.cpp 
+	g++ -std=c++11 -o ligador src/ligador/mainL.cpp src/ligador/ligador.cpp src/global.cpp
 
 print-% : ; @echo $* = $($*)
 

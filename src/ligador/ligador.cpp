@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "../../include/ligador.hpp"
+#include "../../include/global.hpp"
 
 using namespace std;
 
@@ -17,18 +18,31 @@ void Ligador::ligar(){
 
 }
 
+std::string &lstrip(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(),std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+}
+
+
 void Ligador::alinharCodigo(){
-  ifstream file, outfile;
+  ifstream file;
+  ofstream outfile;
   string linha;
+  string saida_ligador = "test_files_asm/saida_ligador.obj";
+  int contL = 1;
   file.open(arquivoLig);
+  outfile.open(saida_ligador);
   if(file.is_open()){
     cout << "Arquivo inicializado: " << arquivoLig << '\n';
   }
   while(getline(file, linha)){
-  //  outfile << linha;
-    cout << linha << "\n";
-  }
+    if(contL == 4){
+      codigo_lig = codigo_lig + lstrip(linha.erase(0,2));
 
+      }
+    contL++;
+  }
+  outfile << codigo_lig;
 }
 
 int Ligador::extraiFatorC(){
