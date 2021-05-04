@@ -21,3 +21,4 @@ extern int idArquivoLig;
 extern map<string, int> mapGlobalDef;
 extern multimap<string, int> mapUsoCorreto;
 extern vector<tuple<char, int>> mapBitValue;
+extern int idLastArq;

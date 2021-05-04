@@ -9,6 +9,7 @@ int main(int argc, char **argv) {
 	}
 
   if (argc == 3){
+     idLastArq = 2;
      idArquivoLig = 1;
 	   Ligador ligador(argv[1]);
 	   ligador.ligar();

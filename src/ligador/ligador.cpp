@@ -38,8 +38,8 @@ void Ligador::populate_tuple(){
 
   i = fator[idArquivoLig-1];
   tamanho = i + extraiFatorC();
-  cout << "i inicial: " << i << endl;
-  cout << "i final: " << tamanho << endl;
+//  cout << "i inicial: " << i << endl;
+//  cout << "i final: " << tamanho << endl;
 
   int j = fator[idArquivoLig-1];
 
@@ -53,7 +53,7 @@ void Ligador::populate_tuple(){
   while(i < tamanho){
     mapBitValue.push_back(make_tuple(bit_id[i], teste[i]));
 
-    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
+//    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
     i++;
   }
 
@@ -81,7 +81,8 @@ Ligador::~Ligador() {}
 void Ligador::ligar(){
   alinharCodigo();
   extraiFatorC();
-//  corrigePendencia();
+  if(idArquivoLig == idLastArq)
+    corrigePendencia();
 
 }
 
@@ -158,5 +159,22 @@ int Ligador::extraiFatorC(){
 }
 
 void Ligador::corrigePendencia(){
+  int tamanho = fator[0] + fator[1] + fator[2] + fator[3];
+  int i = 0, enderecoAux = 0;
+  string aux;
+
+  for(auto elemU : mapUsoCorreto){
+    aux = elemU.first;
+      for(auto elemD : mapGlobalDef){
+        if(elemD.first == aux){
+          cout << "achei!" <<endl;
+        }
+      }
+  }
+
+  while(i < tamanho){
+    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
+    i++;
+  }
 
 }

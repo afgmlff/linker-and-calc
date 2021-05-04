@@ -15,3 +15,4 @@ int idArquivoLig = 0;
 map<string, int> mapGlobalDef = {};
 multimap <string, int> mapUsoCorreto = {};
 vector<tuple<char, int>> mapBitValue = {};
+int idLastArq = 0;
