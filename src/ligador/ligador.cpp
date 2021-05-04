@@ -18,11 +18,17 @@ void Ligador::ligar(){
 }
 
 void Ligador::alinharCodigo(){
-  ifstream file;
+  ifstream file, outfile;
+  string linha;
   file.open(arquivoLig);
   if(file.is_open()){
     cout << "Arquivo inicializado: " << arquivoLig << '\n';
   }
+  while(getline(file, linha)){
+  //  outfile << linha;
+    cout << linha << "\n";
+  }
+
 }
 
 int Ligador::extraiFatorC(){
