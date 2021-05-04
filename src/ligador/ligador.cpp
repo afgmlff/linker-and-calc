@@ -46,6 +46,10 @@ void Ligador::alinharCodigo(){
   string linha;
   string saida_ligador = "test_files_asm/saida_ligador.obj";
   int contL = 1;
+
+  fator[idArquivoLig] = extraiFatorC();
+
+//  cout << fator[idArquivoLig-1];
   file.open(arquivoLig);
   outfile.open(saida_ligador);
   if(file.is_open()){
@@ -59,7 +63,7 @@ void Ligador::alinharCodigo(){
     if(linha.find("D:") == 0){
       mapAux = s_int_to_map(linha.erase(0,3));
       for(auto elem : mapAux){
-        mapGlobalDef[elem.first] = elem.second;
+        mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1]);
       }
     }
     contL++;
@@ -67,10 +71,8 @@ void Ligador::alinharCodigo(){
   outfile << codigo_lig;
   file.close();
   outfile.close();
-  fator[idArquivoLig] = extraiFatorC();
+
 //  cout << fator[idArquivoLig -1]; //o fator de correção atual é o tamanho de espaço utilizado pelo módulo anterior
-
-
 
 }
 
@@ -87,5 +89,6 @@ int Ligador::extraiFatorC(){
       contL++;
     }
     fileAux.close();
+//    cout << fatorC;
     return fatorC;
 }

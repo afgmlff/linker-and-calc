@@ -9,11 +9,11 @@ int main(int argc, char **argv) {
 	}
 
   if (argc == 3){
-     idArquivoLig = 0;
+     idArquivoLig = 1;
 	   Ligador ligador(argv[1]);
 	   ligador.ligar();
 
-     idArquivoLig = 1;
+     idArquivoLig = 2;
      Ligador ligador2(argv[2]);
      ligador2.ligar();
 
