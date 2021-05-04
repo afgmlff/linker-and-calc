@@ -12,6 +12,7 @@ private:
     string arquivoLig;
 
 public:
+
     Ligador(string arquivoL);
     ~Ligador();
 

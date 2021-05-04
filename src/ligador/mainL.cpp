@@ -9,12 +9,20 @@ int main(int argc, char **argv) {
 	}
 
   if (argc == 3){
+     idArquivoLig = 0;
 	   Ligador ligador(argv[1]);
 	   ligador.ligar();
 
+     idArquivoLig = 1;
      Ligador ligador2(argv[2]);
      ligador2.ligar();
+
+     for(auto elem : mapGlobalDef)
+     {
+        std::cout << elem.first << " " << elem.second << " " << "\n";
+     }
   }
+
 
 	return 0;
 

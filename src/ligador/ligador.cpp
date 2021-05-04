@@ -6,6 +6,19 @@
 
 using namespace std;
 
+map<string, int> s_int_to_map(string const& s)
+{
+    map<string, int> m;
+
+    string key, val;
+    istringstream iss(s);
+
+    while(getline(getline(iss, key, ',') >> ws, val))
+        m[key] = stoi(val);
+
+    return m;
+}
+
 Ligador::Ligador(string arquivoL) {
 	arquivoLig = arquivoL;
 }
@@ -14,7 +27,8 @@ Ligador::~Ligador() {}
 
 void Ligador::ligar(){
   alinharCodigo();
-  //extraiFatorC();
+  extraiFatorC();
+//  aplicaFatorC();
 
 }
 
@@ -25,6 +39,8 @@ std::string &lstrip(std::string &s) {
 
 
 void Ligador::alinharCodigo(){
+  map<string, int> mapAux = {};
+
   ifstream file;
   ofstream outfile;
   string linha;
@@ -40,12 +56,22 @@ void Ligador::alinharCodigo(){
       codigo_lig = codigo_lig + lstrip(linha.erase(0,2));
 
       }
+    if(linha.find("D:") == 0){
+      mapAux = s_int_to_map(linha.erase(0,3));
+      for(auto elem : mapAux){
+        mapGlobalDef[elem.first] = elem.second;
+      }
+    }
     contL++;
   }
   outfile << codigo_lig;
   file.close();
   outfile.close();
-  cout << extraiFatorC();
+  fator[idArquivoLig] = extraiFatorC();
+//  cout << fator[idArquivoLig -1]; //o fator de correção atual é o tamanho de espaço utilizado pelo módulo anterior
+
+
+
 }
 
 int Ligador::extraiFatorC(){
