@@ -167,8 +167,11 @@ void Ligador::corrigePendencia(){
     aux = elemU.first;
       for(auto elemD : mapGlobalDef){
         if(elemD.first == aux){
-          cout << "achei!" <<endl;
+          enderecoAux = elemD.second;
+//          cout << "achei!: " << enderecoAux << endl;
         }
+        get<0>(mapBitValue[elemU.second]) = '0';
+        get<1>(mapBitValue[elemU.second]) = enderecoAux;
       }
   }
 

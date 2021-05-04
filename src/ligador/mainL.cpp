@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
      Ligador ligador2(argv[2]);
      ligador2.ligar();
 
-     for(auto elem : mapUsoCorreto)
+     for(auto elem : mapGlobalDef)
      {
         std::cout << elem.first << " " << elem.second << " " << "\n";
      }
