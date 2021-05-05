@@ -44,6 +44,8 @@ public:
   	void simular();
 
   	void percorrerMapa();
+
+		bool hasHeader();
 };
 
 string trocarExtensao(string nome, const string &terminacao);

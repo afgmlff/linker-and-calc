@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "../../include/simulador.hpp"
+#include "../../include/global.hpp"
 
 using namespace std;
 
@@ -11,9 +12,26 @@ Simulador::Simulador(string arquivoS) {
 
 Simulador::~Simulador() {}
 
+bool Simulador::hasHeader(){
+	int countL = 1;
+	string linha;
+	ifstream file;
+	file.open(arquivoSim);
 
+	while(getline(file, linha)){
+		if(countL == 3){
+			file.close();
+			return true;
+		}
+		countL++;
+	}
+	file.close();
+	return false;
+
+}
 
 void Simulador::simular(){
+	cout << hasHeader() << endl;
 	arquivoParaFila();
 	percorrerMapa();
 }
@@ -29,13 +47,31 @@ void Simulador::arquivoParaFila(){
 	if(file.is_open()){
 		cout << "Arquivo inicializado: " << arquivoSim << '\n';
 
-	int index = 0;
-	while (file >> opcode) {
+	int index = 0, countL = 1;
+	string linha;
+
+	if(hasHeader()){
+		while(getline(file, linha)){
+			if(countL == 4){
+				linha = linha.erase(0,3);
+				istringstream iss(linha);
+				while (iss >> opcode){
+					filaInstrucoes[index] = opcode;
+		//	  	cout << filaInstrucoes[index] << ' ';
+			  	index++;
+				}
+			}
+			countL++;
+		}
+
+	}
+	else{
+		while (file >> opcode) {
 	  	filaInstrucoes[index] = opcode;
 //	  	cout << filaInstrucoes[index] << ' ';
 	  	index++;
+		}
 	}
-
 		file.close();
 	}
 
@@ -159,7 +195,7 @@ void Simulador::percorrerMapa(){
 		}
 
 
-		
+
 		cout << "\nPC <- " << pc ;
     	cout << "\nACC <- " << acumulador;
 
