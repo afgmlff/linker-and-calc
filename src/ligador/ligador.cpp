@@ -118,7 +118,11 @@ void Ligador::alinharCodigo(){
     if(linha.find("D:") == 0){
       mapAux = s_int_to_map(linha.erase(0,3));
       for(auto elem : mapAux){
-        mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1]);  //fator de correcao na tabela def global
+        if(idArquivoLig < 3)
+          mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1]);  //fator de correcao na tabela def global
+        if(idArquivoLig == 3)
+          mapGlobalDef[elem.first] = (elem.second + fator[idArquivoLig-1] + fator[idArquivoLig-2]);  //fator de correcao na tabela def global
+
       }
     }
 
@@ -179,5 +183,42 @@ void Ligador::corrigePendencia(){
     cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
     i++;
   }
+
+  i = fator[1];
+  //CORRIGINDO ENDERECOS RELATIVOS FINAIS:
+  while(i < tamanho){
+    if(i < (fator[1] + fator[2])){
+      if(get<0>(mapBitValue[i]) == '1'){
+        get<0>(mapBitValue[i]) = '0';
+        get<1>(mapBitValue[i]) = get<1>(mapBitValue[i]) + fator[1];
+//        cout << "AQUI ->> " << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
+      }
+    }
+    if(i >= (fator[1] + fator[2]) and i < tamanho){
+      get<0>(mapBitValue[i]) = '0';
+      get<1>(mapBitValue[i]) = get<1>(mapBitValue[i]) + fator[1] + fator[2];
+    }
+    i++;
+  }
+
+  cout << "\napos final\n";
+  i = 0;
+  string code_aux = "";
+  while(i < tamanho){
+    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
+    code_aux = code_aux + " " + to_string(get<1>(mapBitValue[i]));
+    i++;
+  }
+
+
+//GERANDO SAIDA
+
+  ofstream outfile;
+  string saida_ligador = "test_files_asm/saida_ligador.obj";
+
+  outfile.open(saida_ligador);
+
+  outfile << code_aux;
+  outfile.close();
 
 }

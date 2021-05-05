@@ -169,6 +169,7 @@ void Montador::primeiraPassagem(bool toBeLinked) {
             }
         }
     }
+    
 //    cout << flagDirLink;
     try{
       if(toBeLinked and ((mapPresencaDir.end() == mapPresencaDir.find("BEGIN")) or (mapPresencaDir.end() == mapPresencaDir.find("END")))) {
