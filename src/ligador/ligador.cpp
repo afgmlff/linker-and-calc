@@ -181,12 +181,12 @@ void Ligador::corrigePendencia(){
         get<1>(mapBitValue[elemU.second]) = enderecoAux;
       }
   }
-
+/*
   while(i < tamanho){
     cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
     i++;
   }
-
+*/
   i = fator[1];
   //CORRIGINDO ENDERECOS RELATIVOS FINAIS:
   while(i < tamanho){
@@ -206,11 +206,11 @@ void Ligador::corrigePendencia(){
     i++;
   }
 
-  cout << "\napos final\n";
+//  cout << "\napos final\n";
   i = 0;
   string code_aux = "";
   while(i < tamanho){
-    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
+//    cout << i << ": " <<get<0>(mapBitValue[i]) << " | " << get<1>(mapBitValue[i]) << endl;
     code_aux = code_aux + " " + to_string(get<1>(mapBitValue[i]));
     i++;
   }
@@ -220,7 +220,7 @@ void Ligador::corrigePendencia(){
 
   ofstream outfile;
   string saida_ligador = "test_files_asm/saida_ligador.obj";
-
+  cout << "Arquivo de saida do ligador: " << saida_ligador << endl;
   outfile.open(saida_ligador);
 
   outfile << code_aux;

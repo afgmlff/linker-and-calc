@@ -1,6 +1,0 @@
-H: test_files_asm/fat_modC 
-H: 3
-H: 010
-T: 5 0 0 
-U: FIM, 1+
-D: MOD_C, 0
