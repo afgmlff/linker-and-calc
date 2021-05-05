@@ -130,7 +130,10 @@ void Ligador::alinharCodigo(){
       auxS = linha.erase(0,3);
       mapAux2 = s_int_to_map(auxS.erase(auxS.size() - 1));
       for(auto elem : mapAux2){
-        mapUsoCorreto.emplace(elem.first, elem.second + fator[idArquivoLig-1]);
+        if(idArquivoLig < 3)
+          mapUsoCorreto.emplace(elem.first, elem.second + fator[idArquivoLig-1]);
+        if(idArquivoLig == 3)
+          mapUsoCorreto.emplace(elem.first, elem.second + fator[idArquivoLig-1] + fator[idArquivoLig-2]);
       }
     }
 
@@ -195,8 +198,10 @@ void Ligador::corrigePendencia(){
       }
     }
     if(i >= (fator[1] + fator[2]) and i < tamanho){
-      get<0>(mapBitValue[i]) = '0';
-      get<1>(mapBitValue[i]) = get<1>(mapBitValue[i]) + fator[1] + fator[2];
+      if(get<0>(mapBitValue[i]) == '1'){
+        get<0>(mapBitValue[i]) = '0';
+        get<1>(mapBitValue[i]) = get<1>(mapBitValue[i]) + fator[1] + fator[2];
+      }
     }
     i++;
   }
