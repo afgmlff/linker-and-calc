@@ -26,18 +26,19 @@ Como executar:
 
     #ex.: ./montador test_files_asm/fat_mod_A.obj test_files_asm/fat_mod_B.obj test_files_asm/fat_mod_C.obj
 
-6) Após ligados, é gerado um arquivo denominado "saida_ligador.obj" dentro da PASTA "test_files_asm". Esse arquivo pode ser utilizado no simulador, utilizando:
+6) Após ligados, é gerado um arquivo de saída do ligador cujo nome é igual ao nome do ÚLTIMO arquivo inserido no módulo do ligador, com a extensão ".obj.obj (para evitar que subescreva o .obj gerado pelo montador anteriormente)
+Por exemplo, a serem ligados os módulos "fat_mod_A.obj + fat_mod_B.obj + fat_mod_C.obj", será resultado o arquivo "fat_mod_C.obj.obj" dentro da PASTA "test_files_asm". Esse arquivo pode ser utilizado no simulador, utilizando:
 
-    $ ./simulador saida_ligador.obj
+    $ ./simulador test_files_asm/fat_mod_C.obj.obj
 
 7) Para casos de apenas 1 arquivo montado (como no primeiro trabalho), o arquivo de saída do próprio montador pode ser utilizado no simulador, da mesma forma:
 
     $ ./simulador <caminho/arquivo1.obj>
 
-    #ex.: ./simulador test_files_asm/ex1.obj (atente-se a extenção .OBJ)
+    #ex.: ./simulador test_files_asm/ex1.obj (atente-se a extensão .OBJ)
 
 8) Assim, o simulador mostrará na tela o valor de PC e ACC após cada instrução, bem como o valor de OUTPUT para instruções do tipo OUTPUT.
-7) Também é gerado um arquivo de saida .OUT na mesma pasta do arquivo de entrada (por exemplo, saida_ligador.out, dentro da pasta "test_files_asm"), com os OUTPUTS do programa, separados por um "ENTER".
+7) Também é gerado um arquivo de saida .OUT na mesma pasta do arquivo de entrada (por exemplo, fat_mod_C.obj.out, dentro da pasta "test_files_asm"), com os OUTPUTS do programa, separados por um "ENTER".
 
 # Formato do arquivo objeto
 O arquivo objeto é composto por 4 partes: cabeçalho (H), código objeto (T), tabela de uso (U) e tabela de definições (D). Por exemplo:

@@ -99,7 +99,7 @@ void Ligador::alinharCodigo(){
   ifstream file;
   ofstream outfile;
   string linha, auxS;
-  string saida_ligador = "test_files_asm/saida_ligador.obj";
+  string saida_ligador = arquivoLig + ".obj";
   int contL = 1;
 
   fator[idArquivoLig] = extraiFatorC();
@@ -219,7 +219,7 @@ void Ligador::corrigePendencia(){
 //GERANDO SAIDA
 
   ofstream outfile;
-  string saida_ligador = "test_files_asm/saida_ligador.obj";
+  string saida_ligador = arquivoLig + ".obj";
   cout << "Arquivo de saida do ligador: " << saida_ligador << endl;
   outfile.open(saida_ligador);
 
